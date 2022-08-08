@@ -1,7 +1,7 @@
-# ----------
+# ----------------------------------------
 # My Array
 # 2022-07-11
-# ----------
+# ----------------------------------------
 # Goal:
 # Implement a vector (mutable array with automatic resizing)
 # > can allocate int array under the hood, just not use its features
@@ -35,8 +35,10 @@ class MyIntArray:
 
     # returns item at specified index
     def at(self, index):
-        if(index < self.size):
+        if(index > 0 and index < self.size):
             return self.internalArray[index]
+        else:
+            raise Exception("Provided Index is out of bounds")
 
     # appends given item to the end of the array
     def push(self, item):
