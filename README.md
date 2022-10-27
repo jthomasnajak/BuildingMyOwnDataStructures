@@ -1,4 +1,4 @@
-# ReLearningToCode
-Coding Practice as I follow Coding Interview University
+# Data Structures Practice
+This repo contains my practice creating data structures as suggested in the Coding Interview University, located here:
 
-located here: https://github.com/jthomasnajak/coding-interview-university-josh
+https://github.com/jthomasnajak/coding-interview-university-josh
