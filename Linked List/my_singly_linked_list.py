@@ -5,55 +5,47 @@
 # Goal:
 # Implement a singly linked list
 
-# node class to build each node of the linked list
-class my_s_list_node:
+class LinkedList:
+    """Implementation of a singly linked list. ....
+    """
+    
+    class _ListNode:
 
-    value = None # contains node's value
-    next = None # pointer to next node
+        def __init__(self, value, next_node = None):
+            self.value = value
+            self.next = next_node
 
-    def __init__(self, passed_value, passed_next_node = None):
-
-        self.value = passed_value
-        self.next = passed_next_node
-
-
-# linked list class
-class my_s_list:
-
-    head = None # head pointer
-
+    def __init__(self) -> None:
+        self.head = None
+    
     # returns number of data elements in the list
     def size(self):
-        if(self.head != None):
-            current_node = self.head
-            list_size = 1
-            while(current_node.next != None):
-                list_size += 1
-                current_node = current_node.next
-            return list_size
-        else:
+        if not self.head:
             return 0
-
+        temp_size, temp_node = 0, self.head
+        while temp_node:
+            temp_size, temp_node = temp_size + 1, temp_node.next
+        return temp_size
+        
     # returns true if empty
     def empty(self):
-        return (self.head == None)
+        return self.head == None
 
     # returns the value of the nth item (starting at 0 for first)
     def value_at(self, index):
-        if (self.head != None):
-            current_node = self.head
-            for i in range(0, index):
-                if (current_node.next != None):
-                    current_node = current_node.next
-                else:
-                    raise Exception("provided index is greater than list size")
-            return current_node.value
-        else:
-            raise Exception("list is currently empty")
-
+        if not self.head:
+            raise ValueError("The list is empty. Cannot access index " + str(index))
+        current_node = self.head
+        for i in range(0, index):
+            if (current_node.next != None):
+                current_node = current_node.next
+            else:
+                raise IndexError(f"Index {index} is greater than list size: {i+1}")
+        return current_node.value
+        
     # adds an item to the front of the list
     def push_front(self, value):
-        self.head = my_s_list_node(value, self.head)
+        self.head = LinkedList._ListNode(value, self.head)
 
     # removes front item and returns its value
     def pop_front(self):
@@ -69,9 +61,9 @@ class my_s_list:
             current_node = self.head
             while(current_node.next != None):
                 current_node = current_node.next
-            current_node.next = my_s_list_node(value)
+            current_node.next = LinkedList._ListNode(value)
         else:
-            self.head = my_s_list_node(value)
+            self.head = LinkedList._ListNode(value)
 
     def pop_back(self):
         if (self.head != None):
@@ -110,7 +102,7 @@ class my_s_list:
                     current_node = current_node.next
                 else:
                     raise Exception("reached end of list before reaching provided index")
-            current_node.next = my_s_list_node(value, current_node.next)
+            current_node.next = LinkedList._ListNode(value, current_node.next)
         else:
             raise Exception("list is currently empty")
 
